@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"google.golang.org/appengine"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -17,8 +17,5 @@ func main() {
 
 	http.Handle("/", r)
 
-	err := http.ListenAndServe(":9090", nil) // set listen port
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	appengine.Main()
 }
