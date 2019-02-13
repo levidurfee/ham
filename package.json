@@ -1,0 +1,12 @@
+{
+  "name": "ham",
+  "description": "HAM Radio with Go",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "git@github.com:levidurfee/ham.git",
+  "author": "Levi Durfee <levi.durfee@gmail.com>",
+  "license": "MIT",
+  "scripts" : {
+    "dev": "dev_appserver.py app.yaml"
+  }
+}

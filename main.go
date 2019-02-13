@@ -1,31 +1,25 @@
 package main
 
-import "github.com/kataras/iris"
+import (
+	"fmt"
+	"google.golang.org/appengine"
+	"net/http"
+)
 
 func main() {
-	app := iris.Default()
+	http.HandleFunc("/", indexHandler)
 
-	// Method:   GET
-	// Resource: http://localhost:8080/
-	app.Handle("GET", "/", func(ctx iris.Context) {
-		ctx.HTML("Hello world!")
-	})
+	appengine.Main()
+}
 
-	// same as app.Handle("GET", "/ping", [...])
-	// Method:   GET
-	// Resource: http://localhost:8080/ping
-	app.Get("/ping", func(ctx iris.Context) {
-		ctx.WriteString("pong")
-	})
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	// if statement redirects all invalid URLs to the root homepage.
+	// Ex: if URL is http://[YOUR_PROJECT_ID].appspot.com/FOO, it will be
+	// redirected to http://[YOUR_PROJECT_ID].appspot.com.
+	if r.URL.Path != "/" {
+		http.Redirect(w, r, "/", http.StatusFound)
+		return
+	}
 
-	// Method:   GET
-	// Resource: http://localhost:8080/hello
-	app.Get("/hello", func(ctx iris.Context) {
-		ctx.JSON(iris.Map{"message": "Hello iris web framework."})
-	})
-
-	// http://localhost:8080
-	// http://localhost:8080/ping
-	// http://localhost:8080/hello
-	app.Run(iris.Addr(":8080"))
+	fmt.Fprintln(w, "Hello, Gopher Network!")
 }

@@ -1,4 +1,4 @@
-package log
+package hamlog
 
 // Entry of contact between two hams
 type Entry struct {
