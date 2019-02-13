@@ -1,41 +1,31 @@
 package main
 
-import (
-	"html/template"
-	"log"
-	"net/http"
-
-	"github.com/gorilla/mux"
-)
-
-func handle(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/index.html")
-	if err != nil {
-		log.Fatal(err)
-	}
-	t.Execute(w, nil)
-}
-
-// LogSheet entry
-type LogSheet struct {
-	Date        string
-	CallSign    string
-	RSTSent     int
-	RSTReceived int
-	Frequency   float64
-	Mode        string
-	Power       string
-	QTH         string
-	Country     string
-	Comments    string
-	Band        int
-}
+import "github.com/kataras/iris"
 
 func main() {
-	r := mux.NewRouter()
-	r.HandleFunc("/", handle)
+	app := iris.Default()
 
-	http.Handle("/", r)
+	// Method:   GET
+	// Resource: http://localhost:8080/
+	app.Handle("GET", "/", func(ctx iris.Context) {
+		ctx.HTML("Hello world!")
+	})
 
-	log.Fatal(http.ListenAndServe(":3001", nil))
+	// same as app.Handle("GET", "/ping", [...])
+	// Method:   GET
+	// Resource: http://localhost:8080/ping
+	app.Get("/ping", func(ctx iris.Context) {
+		ctx.WriteString("pong")
+	})
+
+	// Method:   GET
+	// Resource: http://localhost:8080/hello
+	app.Get("/hello", func(ctx iris.Context) {
+		ctx.JSON(iris.Map{"message": "Hello iris web framework."})
+	})
+
+	// http://localhost:8080
+	// http://localhost:8080/ping
+	// http://localhost:8080/hello
+	app.Run(iris.Addr(":8080"))
 }
