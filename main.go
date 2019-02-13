@@ -2,24 +2,27 @@ package main
 
 import (
 	"fmt"
-	"google.golang.org/appengine"
 	"net/http"
+
+	"google.golang.org/appengine"
 )
 
 func main() {
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/user/", userHandler)
+	http.HandleFunc("/user/create/", createUserHandler)
 
 	appengine.Main()
 }
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	// if statement redirects all invalid URLs to the root homepage.
-	// Ex: if URL is http://[YOUR_PROJECT_ID].appspot.com/FOO, it will be
-	// redirected to http://[YOUR_PROJECT_ID].appspot.com.
-	if r.URL.Path != "/" {
-		http.Redirect(w, r, "/", http.StatusFound)
-		return
-	}
+func createUserHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("create user"))
+}
 
+func userHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("user"))
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello, Gopher Network!")
 }
