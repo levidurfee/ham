@@ -26,20 +26,26 @@ func main() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	g := buildData(r)
+	g.Template = "home.html"
+
+	renderTemplate(w, g)
+}
+
+func buildData(r *http.Request) GOhamData {
 	ctx := appengine.NewContext(r)
 	u := user.Current(ctx)
 	var g GOhamData
 	if u == nil {
 		g.LoggedIn = false
 	}
-	login, _ := user.LoginURL(ctx, "/login")
-	logout, _ := user.LogoutURL(ctx, "/")
+	login, _ := user.LoginURL(ctx, "/login/")
+	logout, _ := user.LogoutURL(ctx, "/logout/")
 
 	g.Login = login
 	g.Logout = logout
-	g.Template = "home.html"
 
-	renderTemplate(w, g)
+	return g
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
