@@ -1,31 +1,64 @@
 package main
 
-import "github.com/kataras/iris"
+import (
+	"html/template"
+	"net/http"
+
+	"google.golang.org/appengine"
+)
+
+// HAMPage is a page, but HAMPage sounds funnier
+type HAMPage struct {
+	Name     string
+	Route    string
+	Template string
+}
+
+// This is where the HTML templates live
+var templateFolder = "templates"
+
+// This is the base template that others extend
+var baseTemplate = "base.html"
+
+// pages is all the static pages on the site, mapped to their routes
+var pages = []HAMPage{
+	HAMPage{
+		Route:    "/",
+		Name:     "Home",
+		Template: "home.html",
+	},
+	HAMPage{
+		Route:    "/user",
+		Name:     "User",
+		Template: "home.html",
+	},
+}
 
 func main() {
-	app := iris.Default()
 
-	// Method:   GET
-	// Resource: http://localhost:8080/
-	app.Handle("GET", "/", func(ctx iris.Context) {
-		ctx.HTML("Hello world!")
-	})
+	for _, v := range pages {
+		http.HandleFunc(v.Route, buildHandler(v))
+	}
 
-	// same as app.Handle("GET", "/ping", [...])
-	// Method:   GET
-	// Resource: http://localhost:8080/ping
-	app.Get("/ping", func(ctx iris.Context) {
-		ctx.WriteString("pong")
-	})
+	http.HandleFunc("/register/", registerHandler)
 
-	// Method:   GET
-	// Resource: http://localhost:8080/hello
-	app.Get("/hello", func(ctx iris.Context) {
-		ctx.JSON(iris.Map{"message": "Hello iris web framework."})
-	})
+	appengine.Main()
+}
 
-	// http://localhost:8080
-	// http://localhost:8080/ping
-	// http://localhost:8080/hello
-	app.Run(iris.Addr(":8080"))
+func buildHandler(page HAMPage) http.HandlerFunc {
+
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		tmpl, err := template.New("").ParseFiles(templateFolder+"/"+page.Template, templateFolder+"/"+baseTemplate)
+		if err != nil {
+			panic("could not load template")
+		}
+
+		tmpl.ExecuteTemplate(w, "base", page)
+	}
+
+	return fn
+}
+
+func registerHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("custom"))
 }
