@@ -11,6 +11,7 @@ import (
 type HAMPage struct {
 	Name     string
 	Template string
+	InNav    bool
 }
 
 var templateFolder = "templates"
@@ -20,6 +21,7 @@ func main() {
 	home := HAMPage{
 		Name:     "Home",
 		Template: "home.html",
+		InNav:    true,
 	}
 
 	indexHandler := buildHandler(home)
