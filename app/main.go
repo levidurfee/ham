@@ -1,21 +1,26 @@
 package main
 
 import (
+	"context"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	"github.com/gorilla/mux"
+	"github.com/levidurfee/ham/hamlog"
 	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/user"
 )
 
 // GOhamData is a struct for storing basic data
 type GOhamData struct {
-	LoggedIn bool
-	Login    string
-	Logout   string
-	Template string
-	User     *user.User
+	LoggedIn   bool
+	Login      string
+	Logout     string
+	Template   string
+	User       *user.User
+	HasEntries bool
 }
 
 func main() {
@@ -48,7 +53,22 @@ func buildData(r *http.Request) GOhamData {
 	g.Login = login
 	g.Logout = logout
 
+	if g.LoggedIn {
+		id, _ := strconv.ParseInt(u.ID, 10, 64)
+		g.HasEntries = userHasEntries(ctx, id)
+	}
+
 	return g
+}
+
+func userHasEntries(ctx context.Context, uid int64) bool {
+	var e hamlog.Entry
+	key := datastore.NewKey(ctx, "Entry", "", uid, nil)
+	if err := datastore.Get(ctx, key, &e); err != nil {
+		return false
+	}
+
+	return true
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
