@@ -26,6 +26,7 @@ type GOhamData struct {
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", homeHandler)
+	r.HandleFunc("/record-entry/", recordEntryHandler)
 	http.Handle("/", r)
 
 	appengine.Main()
@@ -34,6 +35,13 @@ func main() {
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	g := buildData(r)
 	g.Template = "home.html"
+
+	renderTemplate(w, g)
+}
+
+func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
+	g := buildData(r)
+	g.Template = "record-entry.html"
 
 	renderTemplate(w, g)
 }
