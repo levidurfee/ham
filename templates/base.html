@@ -23,15 +23,19 @@
 </head>
 <body>
     <header class="container">
-        {{ .Name }}
+        {{ .User }}
     </header>
     <section class="container">
         <aside>
             <nav>
                 <ul>
-                    <li>
-                        <a href="/user/">Home</a>
-                    </li>
+                    {{ with .Pages }}
+                        {{ range . }}
+                        <li>
+                            <a href="{{ .Route }}">{{ .Name }}</a>
+                        </li>
+                        {{ end }}
+                    {{ end }}
                 </ul>
             </nav>
         </aside>

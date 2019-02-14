@@ -20,6 +20,11 @@ var templateFolder = "templates"
 // This is the base template that others extend
 var baseTemplate = "base.html"
 
+type HAMSite struct {
+	User  string
+	Pages []HAMPage
+}
+
 // pages is all the static pages on the site, mapped to their routes
 var pages = []HAMPage{
 	HAMPage{
@@ -34,10 +39,15 @@ var pages = []HAMPage{
 	},
 }
 
+var ham = HAMSite{
+	User:  "Levi",
+	Pages: pages,
+}
+
 func main() {
 
-	for _, v := range pages {
-		http.HandleFunc(v.Route, buildHandler(v))
+	for _, v := range ham.Pages {
+		http.HandleFunc(v.Route, buildHandler(v, ham))
 	}
 
 	http.HandleFunc("/register/", registerHandler)
@@ -45,7 +55,7 @@ func main() {
 	appengine.Main()
 }
 
-func buildHandler(page HAMPage) http.HandlerFunc {
+func buildHandler(page HAMPage, site HAMSite) http.HandlerFunc {
 
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		tmpl, err := template.New("").ParseFiles(templateFolder+"/"+page.Template, templateFolder+"/"+baseTemplate)
@@ -53,7 +63,7 @@ func buildHandler(page HAMPage) http.HandlerFunc {
 			panic("could not load template")
 		}
 
-		tmpl.ExecuteTemplate(w, "base", page)
+		tmpl.ExecuteTemplate(w, "base", site)
 	}
 
 	return fn
