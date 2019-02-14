@@ -39,8 +39,8 @@ func buildData(r *http.Request) GOhamData {
 	if u == nil {
 		g.LoggedIn = false
 	}
-	login, _ := user.LoginURL(ctx, "/login/")
-	logout, _ := user.LogoutURL(ctx, "/logout/")
+	login, _ := user.LoginURL(ctx, "/")
+	logout, _ := user.LogoutURL(ctx, "/")
 
 	g.Login = login
 	g.Logout = logout
