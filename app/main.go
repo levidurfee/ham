@@ -63,7 +63,8 @@ func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		ctx := appengine.NewContext(r)
 		storeEntry(ctx, hle)
-		renderTemplate(w, g)
+
+		http.Redirect(w, r, "/record-entry/", 302)
 	}
 }
 
