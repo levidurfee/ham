@@ -7,13 +7,14 @@ import (
 	"google.golang.org/appengine"
 )
 
+// HAMPage is a page, but HAMPage sounds funnier
 type HAMPage struct {
 	Name     string
 	Template string
 }
 
-var folder = "templates"
-var base = "base.html"
+var templateFolder = "templates"
+var baseTemplate = "base.html"
 
 func main() {
 	home := HAMPage{
@@ -31,7 +32,7 @@ func main() {
 func buildHandler(page HAMPage) http.HandlerFunc {
 
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.New("").ParseFiles(folder+"/"+page.Template, folder+"/"+base)
+		tmpl, err := template.New("").ParseFiles(templateFolder+"/"+page.Template, templateFolder+"/"+baseTemplate)
 		if err != nil {
 			panic("could not load template")
 		}
