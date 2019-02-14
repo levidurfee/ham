@@ -2,6 +2,7 @@ package hamlog
 
 // Entry of contact between two hams
 type Entry struct {
+	UserID      string
 	Date        string
 	CallSign    string
 	RSTSent     int

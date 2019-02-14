@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"net/http"
-	"strconv"
 	"text/template"
 
 	"github.com/gorilla/mux"
@@ -54,16 +53,15 @@ func buildData(r *http.Request) GOhamData {
 	g.Logout = logout
 
 	if g.LoggedIn {
-		id, _ := strconv.ParseInt(u.ID, 10, 64)
-		g.HasEntries = userHasEntries(ctx, id)
+		g.HasEntries = userHasEntries(ctx, u.ID)
 	}
 
 	return g
 }
 
-func userHasEntries(ctx context.Context, uid int64) bool {
+func userHasEntries(ctx context.Context, uid string) bool {
 	var e hamlog.Entry
-	key := datastore.NewKey(ctx, "Entry", "", uid, nil)
+	key := datastore.NewKey(ctx, "Entry", uid, 0, nil)
 	if err := datastore.Get(ctx, key, &e); err != nil {
 		return false
 	}
