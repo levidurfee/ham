@@ -49,6 +49,6 @@ func buildData(r *http.Request) GOhamData {
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
-	tmpl := template.Must(template.ParseFiles("../templates/base.html", "../templates/"+d.Template))
+	tmpl := template.Must(template.ParseFiles("templates/base.html", "templates/"+d.Template))
 	tmpl.ExecuteTemplate(w, "base", d)
 }
