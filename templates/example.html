@@ -23,9 +23,11 @@
       .navigation.container {
         margin-bottom: 20px;
       }
-      .navigation {
+      .navigation, .footer {
         border-top: 1px solid #eee;
         border-bottom: 1px solid #eee;
+      }
+      .navigation {
         text-transform: uppercase;
       }
       .navigation ul {
@@ -44,6 +46,22 @@
           display: inline-block;
           color:#222;
           font-weight: 600;
+      }
+      .middle {
+          min-height:200px;
+      }
+      .flex {
+          display:flex;
+      }
+      .start {
+          justify-content: flex-start;
+      }
+      .h1 {
+          font-size:5.2rem;
+          margin-bottom: 0;
+      }
+      .pr3 {
+          padding-right:3em;
       }
   </style>
 </head>
@@ -68,8 +86,30 @@
             <li><a href="/support/">Support</a></li>
         </ul>
     </nav>
-    <section class="container">
-        hi
+    <section class="container middle">
+        <div class="flex start">
+            <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" class="pr3" alt="Golang gopher with headphones in front of a microphone">
+            <div>
+                <p class="h1">GOham</p>
+                <p>
+                    A very simple logbook written in <a href="https://golang.org/" target="_BLANK">Go</a> and hosted by 
+                    <a href="https://cloud.google.com/appengine/">Google App Engine</a>. We will release new features 
+                    every month. You can view the road map, releases, issues, and contribute to the code on 
+                    <a href="https://github.com/levidurfee/ham">GitHub</a>.
+                </p>
+                <p>
+                    <a href="/register/" class="button">Get Started</a>
+                </p>
+            </div>
+        </div>
     </section>
+    <footer class="container footer">
+        &copy; 2019 Levi Durfee |
+        <small>
+            All code is open source via the 
+            <a href="https://github.com/levidurfee/ham/blob/master/LICENSE">MIT License</a> and available on 
+            <a href="https://github.com/levidurfee/ham">GitHub</a>.
+        </small>
+    </footer>
 </body>
 </html>
