@@ -49,13 +49,6 @@
       }
       .middle {
           min-height:200px;
-          width:100%;
-      }
-      .flex {
-          display: flex;
-      }
-      .start {
-          justify-content: flex-start;
       }
       .h1 {
           font-size:5.2rem;
@@ -65,9 +58,6 @@
           padding-right:3em;
       }
       @media(max-width: 600px) {
-        .flex {
-            flex-flow: wrap;
-        }
         img.pr3 {
             padding:0;
         }
@@ -96,9 +86,11 @@
         </ul>
     </nav>
     <section class="container middle">
-        <div class="flex start">
-            <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" class="pr3 flex-item" alt="Golang gopher with headphones in front of a microphone">
-            <div class="flex-item">
+        <div class="row">
+            <div class="four columns">
+                <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" class="pr3 flex-item" alt="Golang gopher with headphones in front of a microphone">
+            </div>
+            <div class="eight columns">
                 <p class="h1">GOham</p>
                 <p>
                     A very simple logbook written in <a href="https://golang.org/" target="_BLANK">Go</a> and hosted by 
