@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -22,6 +23,8 @@ type GOhamData struct {
 	User       *user.User
 	HasEntries bool
 }
+
+var QSO = "QSOEntry"
 
 func main() {
 	r := mux.NewRouter()
@@ -54,10 +57,9 @@ func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 	case http.MethodPost:
 		// Save data
 		// TODO create CSRF token and check it
-		vars := mux.Vars(r)
 		hle := &hamlog.Entry{
 			UserID:   g.User.ID,
-			CallSign: vars["callsign"],
+			CallSign: r.PostFormValue("callsign"),
 		}
 		ctx := appengine.NewContext(r)
 		storeEntry(ctx, hle)
@@ -89,7 +91,7 @@ func buildData(r *http.Request) GOhamData {
 
 func userHasEntries(ctx context.Context, uid string) bool {
 	var e hamlog.Entry
-	key := datastore.NewKey(ctx, "Entry", uid, 0, nil)
+	key := datastore.NewKey(ctx, QSO, uid, 0, nil)
 	if err := datastore.Get(ctx, key, &e); err != nil {
 		return false
 	}
@@ -99,11 +101,12 @@ func userHasEntries(ctx context.Context, uid string) bool {
 
 // Maybe have this build a hamlog entry from a request
 func storeEntry(ctx context.Context, entry *hamlog.Entry) {
-	key := datastore.NewIncompleteKey(ctx, "Entry", nil)
-	_, err := datastore.Put(ctx, key, entry)
+	key := datastore.NewIncompleteKey(ctx, QSO, nil)
+	r, err := datastore.Put(ctx, key, entry)
 	if err != nil {
 		log.Println(err)
 	}
+	fmt.Println(r)
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
