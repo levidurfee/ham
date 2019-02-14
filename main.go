@@ -1,28 +1,41 @@
 package main
 
 import (
-	"fmt"
+	"html/template"
 	"net/http"
 
 	"google.golang.org/appengine"
 )
 
+type HAMPage struct {
+	Name string
+}
+
+var folder = "templates"
+var base = "base.html"
+
 func main() {
+	home := HAMPage{
+		Name: "Home",
+	}
+
+	indexHandler := buildHandler(home)
+
 	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/user/", userHandler)
-	http.HandleFunc("/user/create/", createUserHandler)
 
 	appengine.Main()
 }
 
-func createUserHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("create user"))
-}
+func buildHandler(page HAMPage) http.HandlerFunc {
 
-func userHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("user"))
-}
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		tmpl, err := template.New("").ParseFiles("templates/home.html", folder+"/"+base)
+		if err != nil {
+			panic("could not load template")
+		}
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello, Gopher Network!")
+		tmpl.ExecuteTemplate(w, "base", page)
+	}
+
+	return fn
 }

@@ -1,3 +1,4 @@
+{{define "base"}}
 <!doctype html>
 <html ⚡>
 <head>
@@ -29,14 +30,15 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="">Home</a>
+                        <a href="/user/">Home</a>
                     </li>
                 </ul>
             </nav>
         </aside>
         <main>
-            hi
+            {{template "content" .}}
         </main>
     </section>
 </body>
 </html>
+{{end}}
