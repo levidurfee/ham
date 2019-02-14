@@ -70,6 +70,7 @@ func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 
 func buildData(r *http.Request) GOhamData {
 	ctx := appengine.NewContext(r)
+	ctx = hamlog.CtxWithID(ctx)
 	u := user.Current(ctx)
 	var g GOhamData
 	g.LoggedIn = true
