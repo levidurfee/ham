@@ -19,7 +19,7 @@
             </div>
             <nav>
                 {{ if .LoggedIn }}
-                logged in
+                <a href="{{ .Logout }}">Logout</a>
                 {{ else }}
                 <a href="{{ .Login }}">Login</a>
                 {{ end }}

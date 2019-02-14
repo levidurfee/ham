@@ -36,6 +36,7 @@ func buildData(r *http.Request) GOhamData {
 	ctx := appengine.NewContext(r)
 	u := user.Current(ctx)
 	var g GOhamData
+	g.LoggedIn = true
 	if u == nil {
 		g.LoggedIn = false
 	}
