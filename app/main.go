@@ -15,6 +15,7 @@ type GOhamData struct {
 	Login    string
 	Logout   string
 	Template string
+	User     *user.User
 }
 
 func main() {
@@ -37,6 +38,7 @@ func buildData(r *http.Request) GOhamData {
 	u := user.Current(ctx)
 	var g GOhamData
 	g.LoggedIn = true
+	g.User = u
 	if u == nil {
 		g.LoggedIn = false
 	}
