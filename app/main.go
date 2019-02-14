@@ -14,6 +14,7 @@ type GOhamData struct {
 	LoggedIn bool
 	Login    string
 	Logout   string
+	Template string
 }
 
 func main() {
@@ -36,11 +37,12 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 	g.Login = login
 	g.Logout = logout
+	g.Template = "home.html"
 
 	renderTemplate(w, g)
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
-	tmpl := template.Must(template.ParseFiles("../templates/base.html", "../templates/home.html"))
+	tmpl := template.Must(template.ParseFiles("../templates/base.html", "../templates/"+d.Template))
 	tmpl.ExecuteTemplate(w, "base", d)
 }
