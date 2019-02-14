@@ -41,9 +41,19 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 	g := buildData(r)
-	g.Template = "record-entry.html"
 
-	renderTemplate(w, g)
+	switch r.Method {
+	case http.MethodGet:
+		g.Template = "record-entry.html"
+
+		if g.LoggedIn == false {
+			g.Template = "please-login.html"
+		}
+
+		renderTemplate(w, g)
+	case http.MethodPost:
+		// Save data
+	}
 }
 
 func buildData(r *http.Request) GOhamData {
