@@ -14,9 +14,13 @@ type HAMPage struct {
 	Template string
 }
 
+// This is where the HTML templates live
 var templateFolder = "templates"
+
+// This is the base template that others extend
 var baseTemplate = "base.html"
 
+// pages is all the static pages on the site, mapped to their routes
 var pages = []HAMPage{
 	HAMPage{
 		Route:    "/",
