@@ -10,23 +10,26 @@ import (
 // HAMPage is a page, but HAMPage sounds funnier
 type HAMPage struct {
 	Name     string
+	Route    string
 	Template string
-	InNav    bool
 }
 
 var templateFolder = "templates"
 var baseTemplate = "base.html"
 
-func main() {
-	home := HAMPage{
+var pages = []HAMPage{
+	HAMPage{
+		Route:    "/",
 		Name:     "Home",
 		Template: "home.html",
-		InNav:    true,
+	},
+}
+
+func main() {
+
+	for _, v := range pages {
+		http.HandleFunc(v.Route, buildHandler(v))
 	}
-
-	indexHandler := buildHandler(home)
-
-	http.HandleFunc("/", indexHandler)
 
 	appengine.Main()
 }
