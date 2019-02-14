@@ -8,6 +8,9 @@
   <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
   <style>
+        * {
+            box-sizing: border-box;
+        }
       .header div {
           display:flex;
           justify-content: space-between;
@@ -49,9 +52,10 @@
       }
       .middle {
           min-height:200px;
+          width:100%;
       }
       .flex {
-          display:flex;
+          display: flex;
       }
       .start {
           justify-content: flex-start;
@@ -62,6 +66,11 @@
       }
       .pr3 {
           padding-right:3em;
+      }
+      @media(max-width: 600px) {
+        .flex {
+            flex-flow: wrap;
+        }
       }
   </style>
 </head>
@@ -88,8 +97,8 @@
     </nav>
     <section class="container middle">
         <div class="flex start">
-            <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" class="pr3" alt="Golang gopher with headphones in front of a microphone">
-            <div>
+            <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" class="pr3 flex-item" alt="Golang gopher with headphones in front of a microphone">
+            <div class="flex-item">
                 <p class="h1">GOham</p>
                 <p>
                     A very simple logbook written in <a href="https://golang.org/" target="_BLANK">Go</a> and hosted by 
