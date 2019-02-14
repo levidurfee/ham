@@ -36,6 +36,8 @@ func main() {
 		http.HandleFunc(v.Route, buildHandler(v))
 	}
 
+	http.HandleFunc("/register/", registerHandler)
+
 	appengine.Main()
 }
 
@@ -51,4 +53,8 @@ func buildHandler(page HAMPage) http.HandlerFunc {
 	}
 
 	return fn
+}
+
+func registerHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("custom"))
 }
