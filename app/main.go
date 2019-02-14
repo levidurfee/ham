@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"text/template"
 
 	"github.com/gorilla/mux"
 	"google.golang.org/appengine"
@@ -9,12 +10,13 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", handlers.HomeHandler)
+	r.HandleFunc("/", homeHandler)
 	http.Handle("/", r)
 
 	appengine.Main()
 }
 
-func registerHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("custom"))
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("../templates/base.html", "../templates/home.html"))
+	tmpl.ExecuteTemplate(w, "base", nil)
 }
