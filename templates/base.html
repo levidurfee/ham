@@ -4,32 +4,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
-  <title>HAM Radio Log</title>
+  <title>GOham Radio Log</title>
+  <link rel="icon" href="https://bulldog.ws/i/Mzg2TiTfU/favicon.png" type="image/png" size="512x512">
   <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 </head>
 <body>
-    <header class="container">
-        {{ .User }}
-    </header>
-    <section class="container">
-        <aside>
+    <header class="container header">
+        <div>
+            <div>
+                <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" alt="Golang gopher with headphones in front of a microphone">
+                <h1>GOham</h1>
+            </div>
             <nav>
-                <ul>
-                    {{ with .Pages }}
-                        {{ range . }}
-                        <li>
-                            <a href="{{ .Route }}">{{ .Name }}</a>
-                        </li>
-                        {{ end }}
-                    {{ end }}
-                </ul>
+                <a href="">Login</a>
+                <a href="">Register</a>
             </nav>
-        </aside>
-        <main>
+        </div>
+    </header>
+    <nav class="container navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/recent-entries/">Recent Entries</a></li>
+            <li><a href="/support/">Support</a></li>
+        </ul>
+    </nav>
+    <section class="container middle">
+        <div class="row">
             {{template "content" .}}
-        </main>
+        </div>
     </section>
+    <footer class="container footer">
+        &copy; 2019 Levi Durfee |
+        <small>
+            All code is open source via the 
+            <a href="https://github.com/levidurfee/ham/blob/master/LICENSE">MIT License</a> and available on 
+            <a href="https://github.com/levidurfee/ham">GitHub</a>.
+        </small>
+    </footer>
 </body>
 </html>
 {{end}}
