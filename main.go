@@ -23,6 +23,11 @@ var pages = []HAMPage{
 		Name:     "Home",
 		Template: "home.html",
 	},
+	HAMPage{
+		Route:    "/user",
+		Name:     "User",
+		Template: "home.html",
+	},
 }
 
 func main() {
