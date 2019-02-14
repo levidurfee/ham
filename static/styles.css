@@ -54,4 +54,15 @@
     img.pr3 {
         padding:0;
    }
+    .navigation ul {
+        display: block;
+        justify-content: unset;
+    }
+    .navigation li {
+        display:block;
+    }
+    .navigation a {
+        width: 100%;
+        text-align: center;
+    }
 }
