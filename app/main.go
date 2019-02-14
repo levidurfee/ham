@@ -41,10 +41,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 	g := buildData(r)
+	g.Template = "record-entry.html"
 
 	switch r.Method {
 	case http.MethodGet:
-		g.Template = "record-entry.html"
 
 		if g.LoggedIn == false {
 			g.Template = "please-login.html"
@@ -53,6 +53,15 @@ func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, g)
 	case http.MethodPost:
 		// Save data
+		// TODO create CSRF token and check it
+		vars := mux.Vars(r)
+		hle := &hamlog.Entry{
+			UserID:   g.User.ID,
+			CallSign: vars["callsign"],
+		}
+		ctx := appengine.NewContext(r)
+		storeEntry(ctx, hle)
+		renderTemplate(w, g)
 	}
 }
 
@@ -92,6 +101,7 @@ func userHasEntries(ctx context.Context, uid string) bool {
 	return true
 }
 
+// Maybe have this build a hamlog entry from a request
 func storeEntry(ctx context.Context, entry *hamlog.Entry) {
 	key := datastore.NewIncompleteKey(ctx, "Entry", nil)
 	_, err := datastore.Put(ctx, key, entry)
