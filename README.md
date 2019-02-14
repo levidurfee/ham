@@ -4,6 +4,12 @@
 
 * [Mux](https://github.com/gorilla/mux)
 * [Design](https://www.w3schools.com/w3css/tryw3css_templates_social.htm)
+* [Routing](https://www.reddit.com/r/golang/comments/3z10p1/create_dynamic_paths_in_httphandle_with_only/cyjhgqc/)
+* [HTTP Methods](https://stackoverflow.com/a/15253422)
+* [Social Media Site](https://github.com/yTakkar/Go-Mini-Social-Network)
+* [Login / Register](http://www.cihanozhan.com/building-login-and-register-application-with-golang/)
+* [User package reference](https://cloud.google.com/appengine/docs/standard/go/users/reference)
+* [CRUD GAE Datastore](https://cloud.google.com/appengine/docs/standard/go/datastore/creating-entities)
 
 ## Licenses
 

@@ -1,0 +1,53 @@
+{{define "base"}}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <title>GOham Radio Log</title>
+  <link rel="icon" href="https://bulldog.ws/i/Mzg2TiTfU/favicon.png" type="image/png" size="512x512">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="https://cdn.fix.gd/v1/css/60770642-4b19-4ab6-bd8f-9ea6d09c3601.css">
+</head>
+<body>
+    <header class="container header">
+        <div>
+            <div>
+                <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" alt="Golang gopher with headphones in front of a microphone">
+                <h1>GOham</h1>
+            </div>
+            <nav>
+                {{ if .LoggedIn }}
+                <a href="{{ .Logout }}">Logout</a> ({{ .User }})
+                {{ else }}
+                <a href="{{ .Login }}">Login</a>
+                {{ end }}
+            </nav>
+        </div>
+    </header>
+    <nav class="container navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/record-entry/">Record Entry</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/recent-entries/">Recent Entries</a></li>
+            <li><a href="/support/">Support</a></li>
+        </ul>
+    </nav>
+    <section class="container middle">
+        <div class="row">
+            {{template "content" .}}
+        </div>
+    </section>
+    <footer class="container footer">
+        &copy; 2019 Levi Durfee |
+        <small>
+            All code is open source via the 
+            <a href="https://github.com/levidurfee/ham/blob/master/LICENSE">MIT License</a> and available on 
+            <a href="https://github.com/levidurfee/ham">GitHub</a>.
+        </small>
+    </footer>
+</body>
+</html>
+{{end}}
