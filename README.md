@@ -9,6 +9,7 @@
 * [Social Media Site](https://github.com/yTakkar/Go-Mini-Social-Network)
 * [Login / Register](http://www.cihanozhan.com/building-login-and-register-application-with-golang/)
 * [User package reference](https://cloud.google.com/appengine/docs/standard/go/users/reference)
+* [CRUD GAE Datastore](https://cloud.google.com/appengine/docs/standard/go/datastore/creating-entities)
 
 ## Licenses
 
