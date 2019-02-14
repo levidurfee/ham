@@ -8,6 +8,7 @@
 * [HTTP Methods](https://stackoverflow.com/a/15253422)
 * [Social Media Site](https://github.com/yTakkar/Go-Mini-Social-Network)
 * [Login / Register](http://www.cihanozhan.com/building-login-and-register-application-with-golang/)
+* [User package reference](https://cloud.google.com/appengine/docs/standard/go/users/reference)
 
 ## Licenses
 
