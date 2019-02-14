@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"text/template"
 
@@ -54,6 +55,10 @@ func buildData(r *http.Request) GOhamData {
 
 	if g.LoggedIn {
 		g.HasEntries = userHasEntries(ctx, u.ID)
+		e := &hamlog.Entry{
+			UserID: u.ID,
+		}
+		storeEntry(ctx, e)
 	}
 
 	return g
@@ -67,6 +72,14 @@ func userHasEntries(ctx context.Context, uid string) bool {
 	}
 
 	return true
+}
+
+func storeEntry(ctx context.Context, entry *hamlog.Entry) {
+	key := datastore.NewIncompleteKey(ctx, "Entry", nil)
+	_, err := datastore.Put(ctx, key, entry)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
