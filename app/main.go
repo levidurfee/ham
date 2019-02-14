@@ -82,10 +82,6 @@ func buildData(r *http.Request) GOhamData {
 
 	if g.LoggedIn {
 		g.HasEntries = userHasEntries(ctx, u.ID)
-		e := &hamlog.Entry{
-			UserID: u.ID,
-		}
-		storeEntry(ctx, e)
 	}
 
 	return g
