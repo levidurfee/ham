@@ -3,11 +3,14 @@ package main
 import (
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"google.golang.org/appengine"
 )
 
 func main() {
-	http.HandleFunc("/", registerHandler)
+	r := mux.NewRouter()
+	r.HandleFunc("/", registerHandler)
+	http.Handle("/", r)
 
 	appengine.Main()
 }
