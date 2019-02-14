@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/levidurfee/ham/handlers"
 	"google.golang.org/appengine"
 )
 
