@@ -1,5 +1,7 @@
 # Ham Radio
 
+[ARS Licenses](http://wireless.fcc.gov/uls/data/complete/l_amat.zip)
+
 ## Resources
 
 * [Mux](https://github.com/gorilla/mux)
