@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <title>GOham Radio Log</title>
+  <link rel="icon" href="https://bulldog.ws/i/Mzg2TiTfU/favicon.png" type="image/png" size="512x512">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600|Roboto+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="https://cdn.fix.gd/v1/css/b61894f8-0cd5-42a8-9152-39fd1bbc8f05.css">
+  <style>
+ 
+
+  </style>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+</head>
+<body id="Ham">
+    <header class="container header">
+        <div>
+            <div>
+                <img class="header-img" src="https://i.levi.lol/images/2019/02/15/goham.png" alt="Golang gopher with headphones in front of a microphone">
+                <h1>GOham</h1>
+            </div>
+            <nav class="vertical-align">
+                <div id="firebaseui-auth-container"></div>
+                <div id="sign-in"></div>
+                <div>
+                    <span id="account-details"></span>
+                    <a id="sign-out" style="display:none;" href="#">Sign Out</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <nav class="container navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard/">Dashboard</a></li>
+            <li><a href="/recent-entries/">Recent Entries</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/support/">Support</a></li>
+        </ul>
+    </nav>
+    <section class="container middle">
+        <div class="row">
+            <div class="four columns">
+                <img src="https://bulldog.ws/i/Mzg2JeGY1/goham.png" class="pr3 flex-item" alt="Golang gopher with headphones in front of a microphone">
+            </div>
+            <div class="eight columns">
+                <p class="h1">QSO Logger for HAMs</p>
+                <p class="mono">
+                    A very simple logbook written in <a href="https://golang.org/" target="_BLANK">Go</a> and hosted by 
+                    <a href="https://cloud.google.com/appengine/">Google App Engine</a>. We will release new features 
+                    every month. You can view the road map, releases, issues, and contribute to the code on 
+                    <a href="https://github.com/levidurfee/ham">GitHub</a>.
+                </p>
+                <p>
+                    <a href="/register/" class="button">Get Started</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <footer class="container footer">
+        <small>
+            &copy; 2019 Levi Durfee |
+            All code is open source via the 
+            <a href="https://github.com/levidurfee/ham/blob/master/LICENSE">MIT License</a> and available on 
+            <a href="https://github.com/levidurfee/ham">GitHub</a>.
+            <a href="/tos/">Terms of Service</a>.
+        </small>
+    </footer>
+</body>
+</html>

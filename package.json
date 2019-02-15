@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts" : {
     "dev": "dev_appserver.py app/app.yaml",
-    "deploy": "gcloud app deploy -q app/app.yaml"
+    "deploy": "gcloud app deploy -q app/app.yaml",
+    "html": "php -S localhost:3131 -t resources/html/"
   }
 }
