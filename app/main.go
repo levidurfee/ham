@@ -9,6 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/levidurfee/ham/hamlog"
+	"github.com/levidurfee/ham/id"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/user"
@@ -22,8 +23,10 @@ type GOhamData struct {
 	Template   string
 	User       *user.User
 	HasEntries bool
+	RequestID  int64
 }
 
+// QSO Entity type
 var QSO = "QSOEntry"
 
 func main() {
@@ -55,13 +58,16 @@ func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 
 		renderTemplate(w, g)
 	case http.MethodPost:
-		// Save data
 		// TODO create CSRF token and check it
-		hle := &hamlog.Entry{
-			UserID:   g.User.ID,
-			CallSign: r.PostFormValue("callsign"),
-		}
+
 		ctx := appengine.NewContext(r)
+
+		hle := &hamlog.Entry{
+			RequestID: id.GetID(ctx),
+			UserID:    g.User.ID,
+			CallSign:  r.PostFormValue("callsign"),
+		}
+
 		storeEntry(ctx, hle)
 
 		http.Redirect(w, r, "/record-entry/", 302)
@@ -70,7 +76,7 @@ func recordEntryHandler(w http.ResponseWriter, r *http.Request) {
 
 func buildData(r *http.Request) GOhamData {
 	ctx := appengine.NewContext(r)
-	ctx = hamlog.CtxWithID(ctx)
+	ctx = id.CtxWithID(ctx)
 	u := user.Current(ctx)
 	var g GOhamData
 	g.LoggedIn = true
@@ -87,6 +93,8 @@ func buildData(r *http.Request) GOhamData {
 	if g.LoggedIn {
 		g.HasEntries = userHasEntries(ctx, u.ID)
 	}
+
+	id.PrintID(ctx)
 
 	return g
 }

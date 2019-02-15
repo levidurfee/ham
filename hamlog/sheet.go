@@ -14,4 +14,5 @@ type Entry struct {
 	Country     string
 	Comments    string
 	Band        int
+	RequestID   int64
 }
