@@ -3,6 +3,8 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/levidurfee/ham/models"
+
 	"github.com/levidurfee/ham/hamlog"
 	"github.com/levidurfee/ham/id"
 	"github.com/levidurfee/ham/repos"
@@ -11,7 +13,7 @@ import (
 
 // RecordEntryHandler records a new log entry
 func RecordEntryHandler(w http.ResponseWriter, r *http.Request) {
-	g := hamlog.BuildData(r)
+	g := models.NewPageData(r)
 	g.Template = "record-entry.html"
 
 	switch r.Method {
