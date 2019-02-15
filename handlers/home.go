@@ -3,13 +3,13 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/levidurfee/ham/hamlog"
+	"github.com/levidurfee/ham/models"
 )
 
 // HomeHandler handles loading the homepage
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	g := hamlog.BuildData(r)
-	g.Template = "home.html"
+	p := models.NewPageData(r)
+	p.Template = "home.html"
 
-	RenderTemplate(w, g)
+	RenderTemplate(w, p)
 }
