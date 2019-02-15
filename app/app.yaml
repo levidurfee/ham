@@ -7,3 +7,28 @@ handlers:
   - url: /.*
     script: _go_app
 
+skip_files:
+# default from GAE
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+
+# custom entries
+
+# dev-related files
+- ptvsd
+- pydev_startup.py
+- .pylintrc
+- .data
+- .vscode
+
+# version control files
+- .git
+- .gitignore
+- .gitattributes
+
+# non-application files
+- README.md
+- ^(.*/)?.*\.mwb(.bak)?$ # workbench models
