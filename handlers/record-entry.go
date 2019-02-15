@@ -5,7 +5,6 @@ import (
 
 	"github.com/levidurfee/ham/models"
 
-	"github.com/levidurfee/ham/hamlog"
 	"github.com/levidurfee/ham/id"
 	"github.com/levidurfee/ham/repos"
 	"google.golang.org/appengine"
@@ -29,13 +28,13 @@ func RecordEntryHandler(w http.ResponseWriter, r *http.Request) {
 
 		ctx := appengine.NewContext(r)
 
-		hle := &hamlog.Entry{
+		hle := &models.QSO{
 			RequestID: id.GetID(ctx),
 			UserID:    g.User.ID,
 			CallSign:  r.PostFormValue("callsign"),
 		}
 
-		repos.StoreEntry(ctx, hle)
+		repos.SaveQSO(ctx, hle)
 
 		http.Redirect(w, r, "/record-entry/", 302)
 	}
