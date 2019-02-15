@@ -3,11 +3,6 @@ package models
 import (
 	"net/http"
 
-<<<<<<< HEAD
-	"google.golang.org/appengine/log"
-
-=======
->>>>>>> master
 	"github.com/levidurfee/ham/id"
 	"github.com/levidurfee/ham/user"
 	"google.golang.org/appengine"
@@ -32,13 +27,6 @@ func NewPageData(r *http.Request) PageData {
 	g.RequestID = id.GetID(ctx)
 	g.UserID = ""
 	token, err := r.Cookie("token")
-<<<<<<< HEAD
-	if err != nil {
-		log.Debugf(ctx, "No token cookie", nil)
-	}
-	if err == nil {
-		g.Token = token.Value
-=======
 
 	if err == nil {
 		g.Token = token.Value
@@ -47,7 +35,6 @@ func NewPageData(r *http.Request) PageData {
 		// API each pageload. There is a noticeable difference in speed on the
 		// site when you're logged in vs. when you're not logged in. So using
 		// memcache might help this.
->>>>>>> master
 		g.HAM, err = user.NewHAM(r)
 		if err == nil {
 			g.UserID = g.HAM.UID
