@@ -76,3 +76,9 @@
 #Ham .firebaseui-idp-list { margin:0; }
 #Ham .firebaseui-card-content { padding:0 4px; }
 header.header {max-height:88px; overflow: hidden; }
+<<<<<<< HEAD
+=======
+.hide {
+    display:none !important;
+}
+>>>>>>> master
