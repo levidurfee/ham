@@ -30,7 +30,7 @@ func RecordEntryHandler(w http.ResponseWriter, r *http.Request) {
 
 		hle := &models.QSO{
 			RequestID: id.GetID(ctx),
-			UserID:    g.User.ID,
+			UserID:    g.UserID,
 			CallSign:  r.PostFormValue("callsign"),
 		}
 

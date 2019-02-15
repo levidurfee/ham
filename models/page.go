@@ -3,39 +3,43 @@ package models
 import (
 	"net/http"
 
+	"google.golang.org/appengine/log"
+
 	"github.com/levidurfee/ham/id"
+	"github.com/levidurfee/ham/user"
 	"google.golang.org/appengine"
-	"google.golang.org/appengine/user"
 )
 
 // PageData is a struct for storing basic data
 type PageData struct {
 	Title     string
 	LoggedIn  bool
-	Login     string
-	Logout    string
 	Template  string
-	User      *user.User
 	RequestID int64
+	Token     string
+	UserID    string
+	HAM       *user.HAM
 }
 
 // NewPageData is a construct for the PageData struct
 func NewPageData(r *http.Request) PageData {
 	ctx := appengine.NewContext(r)
 	ctx = id.CtxWithID(ctx)
-	u := user.Current(ctx)
 	var g PageData
-	g.LoggedIn = true
-	g.User = u
 	g.RequestID = id.GetID(ctx)
-	if u == nil {
-		g.LoggedIn = false
+	g.UserID = ""
+	token, err := r.Cookie("token")
+	if err != nil {
+		log.Debugf(ctx, "No token cookie", nil)
 	}
-	login, _ := user.LoginURL(ctx, "/")
-	logout, _ := user.LogoutURL(ctx, "/")
-
-	g.Login = login
-	g.Logout = logout
+	if err == nil {
+		g.Token = token.Value
+		g.HAM, err = user.NewHAM(r)
+		if err == nil {
+			g.UserID = g.HAM.UID
+			//log.Debugf(ctx, "%v", g.UserID)
+		}
+	}
 
 	id.PrintID(ctx)
 

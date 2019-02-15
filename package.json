@@ -8,6 +8,6 @@
   "license": "MIT",
   "scripts" : {
     "dev": "dev_appserver.py app/app.yaml",
-    "deploy": "gcloud app deploy app/app.yaml"
+    "deploy": "gcloud app deploy -q app/app.yaml"
   }
 }
