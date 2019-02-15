@@ -1,5 +1,8 @@
 package models
 
+// QSOEntityType is for saving to the datastore
+const QSOEntityType = "QSOEntry"
+
 // QSO of contact between two hams
 type QSO struct {
 	UserID      string
