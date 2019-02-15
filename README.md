@@ -11,6 +11,7 @@
 * [User package reference](https://cloud.google.com/appengine/docs/standard/go/users/reference)
 * [CRUD GAE Datastore](https://cloud.google.com/appengine/docs/standard/go/datastore/creating-entities)
 * [GAE memcache](https://cloud.google.com/appengine/docs/standard/go/memcache/using)
+* [Only log out of app, not Google](http://ptspts.blogspot.com/2011/12/how-to-log-out-from-appengine-app-only.html)
 
 ## Licenses
 
