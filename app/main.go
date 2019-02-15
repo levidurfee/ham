@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	"github.com/gorilla/mux"
@@ -81,6 +82,7 @@ func buildData(r *http.Request) GOhamData {
 	var g GOhamData
 	g.LoggedIn = true
 	g.User = u
+	g.RequestID = id.GetID(ctx)
 	if u == nil {
 		g.LoggedIn = false
 	}
@@ -120,6 +122,7 @@ func storeEntry(ctx context.Context, entry *hamlog.Entry) {
 }
 
 func renderTemplate(w http.ResponseWriter, d GOhamData) {
+	w.Header().Set("Ham-Request-ID", strconv.FormatInt(d.RequestID, 10))
 	tmpl := template.Must(template.ParseFiles("templates/base.html", "templates/"+d.Template))
 	tmpl.ExecuteTemplate(w, "base", d)
 }
