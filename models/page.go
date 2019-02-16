@@ -3,6 +3,10 @@ package models
 import (
 	"net/http"
 
+	"google.golang.org/appengine/log"
+
+	"github.com/levidurfee/ham/sess"
+
 	"github.com/levidurfee/ham/id"
 	"github.com/levidurfee/ham/user"
 	"google.golang.org/appengine"
@@ -20,9 +24,16 @@ type PageData struct {
 }
 
 // NewPageData is a construct for the PageData struct
-func NewPageData(r *http.Request) PageData {
+func NewPageData(w http.ResponseWriter, r *http.Request) PageData {
+
 	ctx := appengine.NewContext(r)
 	ctx = id.CtxWithID(ctx)
+
+	sess.Save(ctx, w, r, "Hi", "levi")
+	l, _ := sess.Get(ctx, w, r, "Hi")
+
+	log.Debugf(ctx, "SESSION: [%v] ", l)
+
 	var g PageData
 	g.RequestID = id.GetID(ctx)
 	g.UserID = ""

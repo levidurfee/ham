@@ -12,7 +12,7 @@ import (
 
 // RecordEntryHandler records a new log entry
 func RecordEntryHandler(w http.ResponseWriter, r *http.Request) {
-	g := models.NewPageData(r)
+	g := models.NewPageData(w, r)
 	g.Template = "record-entry.html"
 
 	switch r.Method {

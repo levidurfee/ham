@@ -8,7 +8,7 @@ import (
 
 // TOSHandler handles loading the login page
 func TOSHandler(w http.ResponseWriter, r *http.Request) {
-	p := models.NewPageData(r)
+	p := models.NewPageData(w, r)
 	p.Template = "tos.html"
 
 	RenderTemplate(w, p)

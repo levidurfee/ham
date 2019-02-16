@@ -19,12 +19,18 @@ var (
 	}
 )
 
+// TODO
+// * Create middleware that checks if user is logged in
+// * Set an encrypted cookie that says if they're logged in
+// * Cache their Firebase token in memcache
+
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", handlers.HomeHandler)
 	r.HandleFunc("/login/", handlers.LoginHandler)
 	r.HandleFunc("/tos/", handlers.TOSHandler)
 	r.HandleFunc("/record-entry/", handlers.RecordEntryHandler)
+	r.HandleFunc("/dashboard/", handlers.DashboardHandler)
 	http.Handle("/", r)
 
 	appengine.Main()

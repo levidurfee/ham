@@ -8,7 +8,7 @@ import (
 
 // LoginHandler handles loading the login page
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	p := models.NewPageData(r)
+	p := models.NewPageData(w, r)
 	p.Template = "login.html"
 
 	RenderTemplate(w, p)

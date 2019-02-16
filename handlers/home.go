@@ -8,7 +8,7 @@ import (
 
 // HomeHandler handles loading the homepage
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	p := models.NewPageData(r)
+	p := models.NewPageData(w, r)
 	p.Template = "home.html"
 
 	RenderTemplate(w, p)
