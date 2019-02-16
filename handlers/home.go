@@ -2,11 +2,16 @@ package handlers
 
 import (
 	"net/http"
+
+	"github.com/levidurfee/ham/page"
 )
 
 // HomeHandler handles loading the homepage
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	var template = "home.html"
+	td := page.TemplateData{
+		Title:    "Home",
+		Template: "home.html",
+	}
 
-	RenderTemplate(w, p)
+	renderTemplate(w, td)
 }
