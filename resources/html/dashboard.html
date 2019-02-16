@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <title>GOham Radio Log</title>
+  <link rel="icon" href="https://bulldog.ws/i/Mzg2TiTfU/favicon.png" type="image/png" size="512x512">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600|Roboto+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="https://cdn.fix.gd/v1/css/b61894f8-0cd5-42a8-9152-39fd1bbc8f05.css">
+  <style>
+  .flex {
+      display: flex;
+      justify-content:space-between;
+      flex-wrap: wrap;
+  }
+  .flex .list-item {
+      width:17%;
+      border:1px solid #eee;
+      padding:20px;
+      margin-bottom: 20px;
+      text-align: center;
+  }
+  .dashboard h2, .dashboard .heading {
+      border-bottom:2px solid #eee;
+  }
+  </style>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+</head>
+<body id="Ham">
+    <header class="container header">
+        <div>
+            <div>
+                <img class="header-img" src="https://i.levi.lol/images/2019/02/15/goham.png" alt="Golang gopher with headphones in front of a microphone">
+                <h1>GOham</h1>
+            </div>
+            <nav class="vertical-align">
+                <div id="firebaseui-auth-container"></div>
+                <div id="sign-in"></div>
+                <div>
+                    <span id="account-details"></span>
+                    <a id="sign-out" style="display:none;" href="#">Sign Out</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <nav class="container navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard/">Dashboard</a></li>
+            <li><a href="/recent-entries/">Recent Entries</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/support/">Support</a></li>
+        </ul>
+    </nav>
+    <section class="container middle">
+        <div class="row mono dashboard">
+            <div class="two columns">
+                <span class="heading">Menu</span>
+                <ul>
+                    <li><a href="">Record</a></li>
+                    <li><a href="">States</a></li>
+                    <li><a href="">Countries</a></li>
+                </ul>
+            </div>
+            <div class="ten columns">
+                <h2>States</h2>
+                <div class="flex">
+                    <div class="list-item" title="Alabama">
+                        AL
+                    </div>
+                    <div class="list-item" title="Alaska">
+                        AK
+                    </div>
+                    <div class="list-item" title="Arizona">
+                        AZ
+                    </div>
+                    <div class="list-item" title="Arkansas">
+                        AR
+                    </div>
+                    <div class="list-item" title="California">
+                        CA
+                    </div>
+                    <div class="list-item" title="Colorado">
+                        CO
+                    </div>
+                    <div class="list-item" title="Connecticut">
+                        CT
+                    </div>
+                    <div class="list-item" title="Delaware">
+                        DE
+                    </div>
+                    <div class="list-item" title="Florida">
+                        FL
+                    </div>
+                    <div class="list-item" title="Georgia">
+                        GA
+                    </div>
+                    <div class="list-item" title="Hawaii">
+                        HI
+                    </div>
+                    <div class="list-item" title="Idaho">
+                        ID
+                    </div>
+                    <div class="list-item" title="Illinois">
+                        IL
+                    </div>
+                    <div class="list-item" title="Indiana">
+                        IN
+                    </div>
+                    <div class="list-item" title="Iowa">
+                        IA
+                    </div>
+                    <div class="list-item" title="Kansas">
+                        KS
+                    </div>
+                    <div class="list-item" title="Kentucky">
+                        KY
+                    </div>
+                    <div class="list-item" title="Louisiana">
+                        LA
+                    </div>
+                    <div class="list-item" title="Maine">
+                        ME
+                    </div>
+                    <div class="list-item" title="Maryland">
+                        MD
+                    </div>
+                    <div class="list-item" title="Massachusetts">
+                        MA
+                    </div>
+                    <div class="list-item" title="Michigan">
+                        MI
+                    </div>
+                    <div class="list-item" title="Minnesota">
+                        MN
+                    </div>
+                    <div class="list-item" title="Mississippi">
+                        MS
+                    </div>
+                    <div class="list-item" title="Missouri">
+                        MO
+                    </div>
+                    <div class="list-item" title="Montana">
+                        MT
+                    </div>
+                    <div class="list-item" title="Nebraska">
+                        NE
+                    </div>
+                    <div class="list-item" title="Nevada">
+                        NV
+                    </div>
+                    <div class="list-item" title="New Hampshire">
+                        NH
+                    </div>
+                    <div class="list-item" title="New Jersey">
+                        NJ
+                    </div>
+                    <div class="list-item" title="New Mexico">
+                        NM
+                    </div>
+                    <div class="list-item" title="New York">
+                        NY
+                    </div>
+                    <div class="list-item" title="North Carolina">
+                        NC
+                    </div>
+                    <div class="list-item" title="North Dakota">
+                        ND
+                    </div>
+                    <div class="list-item" title="Ohio">
+                        OH
+                    </div>
+                    <div class="list-item" title="Oklahoma">
+                        OK
+                    </div>
+                    <div class="list-item" title="Oregon">
+                        OR
+                    </div>
+                    <div class="list-item" title="Pennsylvania">
+                        PA
+                    </div>
+                    <div class="list-item" title="Rhode Island">
+                        RI
+                    </div>
+                    <div class="list-item" title="South Carolina">
+                        SC
+                    </div>
+                    <div class="list-item" title="South Dakota">
+                        SD
+                    </div>
+                    <div class="list-item" title="Tennessee">
+                        TN
+                    </div>
+                    <div class="list-item" title="Texas">
+                        TX
+                    </div>
+                    <div class="list-item" title="Utah">
+                        UT
+                    </div>
+                    <div class="list-item" title="Vermont">
+                        VT
+                    </div>
+                    <div class="list-item" title="Virginia">
+                        VA
+                    </div>
+                    <div class="list-item" title="Washington">
+                        WA
+                    </div>
+                    <div class="list-item" title="West Virginia">
+                        WV
+                    </div>
+                    <div class="list-item" title="Wisconsin">
+                        WI
+                    </div>
+                    <div class="list-item" title="Wyoming">
+                        WY
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container footer">
+        <small>
+            &copy; 2019 Levi Durfee |
+            All code is open source via the 
+            <a href="https://github.com/levidurfee/ham/blob/master/LICENSE">MIT License</a> and available on 
+            <a href="https://github.com/levidurfee/ham">GitHub</a>.
+            <a href="/tos/">Terms of Service</a>.
+        </small>
+    </footer>
+</body>
+</html>
