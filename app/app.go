@@ -5,16 +5,20 @@ import (
 
 	"github.com/levidurfee/ham/sess"
 
-	"github.com/levidurfee/ham/models"
 	"google.golang.org/appengine"
 )
 
+// App model contains an assortment of information
+type App struct {
+	LoggedIn bool
+}
+
 // NewApp constructs a struct with app data.
-func NewApp(w http.ResponseWriter, r *http.Request) models.App {
+func NewApp(w http.ResponseWriter, r *http.Request) App {
 	// First we'll create an App struct. We go ahead and set the LoggedIn field
 	// false as a default, we'll check cookies to see if they're logged in, and
 	// can update this field if they are logged in.
-	app := models.App{
+	app := App{
 		LoggedIn: false,
 	}
 
@@ -25,6 +29,6 @@ func NewApp(w http.ResponseWriter, r *http.Request) models.App {
 	return app
 }
 
-// func (h *models.App) VerifyToken(token string) (bool, error) {
+// func (h *App) VerifyToken(token string) (bool, error) {
 
 // }
