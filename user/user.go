@@ -3,6 +3,8 @@ package user
 import (
 	"net/http"
 
+	"github.com/levidurfee/ham/sess"
+
 	"google.golang.org/api/option"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
@@ -26,7 +28,7 @@ type HAM struct {
 }
 
 // NewHAM creates a new HAM
-func NewHAM(r *http.Request) (*HAM, error) {
+func NewHAM(w http.ResponseWriter, r *http.Request) (*HAM, error) {
 	// Get a new Context from App Engine
 	ctx := appengine.NewContext(r)
 
@@ -69,6 +71,8 @@ func NewHAM(r *http.Request) (*HAM, error) {
 		UID:   user.UID,
 		In:    true,
 	}
+
+	sess.Save(ctx, w, r, "loggedin", "true")
 
 	return ham, nil
 }

@@ -46,7 +46,7 @@ func NewPageData(w http.ResponseWriter, r *http.Request) PageData {
 		// API each pageload. There is a noticeable difference in speed on the
 		// site when you're logged in vs. when you're not logged in. So using
 		// memcache might help this.
-		g.HAM, err = user.NewHAM(r)
+		g.HAM, err = user.NewHAM(w, r)
 		if err == nil {
 			g.UserID = g.HAM.UID
 			//log.Debugf(ctx, "%v", g.UserID)

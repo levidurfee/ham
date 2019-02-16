@@ -3,7 +3,10 @@ package repos
 import (
 	"net/http"
 
+	"github.com/levidurfee/ham/sess"
+
 	"github.com/levidurfee/ham/models"
+	"google.golang.org/appengine"
 )
 
 // BuildApp constructs a struct with app data.
@@ -14,6 +17,10 @@ func BuildApp(w http.ResponseWriter, r *http.Request) *models.App {
 	app := &models.App{
 		LoggedIn: false,
 	}
+
+	ctx := appengine.NewContext(r)
+	loggedIn, _ := sess.Get(ctx, w, r, "loggedin")
+	_ = loggedIn
 
 	return app
 }
