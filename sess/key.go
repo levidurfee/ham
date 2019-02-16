@@ -18,3 +18,14 @@ func getSessionKey(ctx context.Context) ([]byte, error) {
 
 	return sc, nil
 }
+
+func getEncKey(ctx context.Context) ([]byte, error) {
+	sc, err := base64.StdEncoding.DecodeString(os.Getenv("SESSION_ENC"))
+	if err != nil {
+		log.Debugf(ctx, "Could not get session key from environment. [%v]", err)
+
+		return nil, err
+	}
+
+	return sc, nil
+}
