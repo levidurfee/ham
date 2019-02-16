@@ -17,9 +17,7 @@ func Get(ctx context.Context, w http.ResponseWriter, r *http.Request, key string
 		return nil, err
 	}
 
-	store := sessions.NewCookieStore(sk)
-
-	session, err := store.Get(r, defaultSession)
+	session, err := sessions.NewCookieStore(sk).Get(r, defaultSession)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return nil, err
