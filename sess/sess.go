@@ -42,6 +42,8 @@ func Save(ctx context.Context, w http.ResponseWriter, r *http.Request, key strin
 		return err
 	}
 
+	session.Values[key] = value
+
 	session.Save(r, w)
 
 	return nil
