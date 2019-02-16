@@ -48,7 +48,3 @@ func Save(ctx context.Context, w http.ResponseWriter, r *http.Request, key strin
 
 	return nil
 }
-
-func httpSessionError(w http.ResponseWriter, err error) {
-	http.Error(w, err.Error(), http.StatusInternalServerError)
-}
