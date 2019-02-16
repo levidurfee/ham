@@ -11,5 +11,4 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	p := models.NewPageData(w, r)
 	p.Template = "login.html"
 
-	RenderTemplate(w, p)
 }

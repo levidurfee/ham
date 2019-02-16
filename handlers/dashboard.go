@@ -11,5 +11,4 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	p := models.NewPageData(w, r)
 	p.Template = "dashboard.html"
 
-	RenderTemplate(w, p)
 }
