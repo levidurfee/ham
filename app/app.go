@@ -22,6 +22,10 @@ func NewApp(w http.ResponseWriter, r *http.Request) App {
 		LoggedIn: false,
 	}
 
+	// I'll want to see if there is a loggedin cookie set, if there isn't, I'll
+	// check to see if there is a token, if there is I'll verify it with
+	// firebase. if there isn't, they are a guest user.
+
 	ctx := appengine.NewContext(r)
 	loggedIn, _ := sess.Get(ctx, w, r, "loggedin")
 	_ = loggedIn
