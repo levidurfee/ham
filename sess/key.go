@@ -8,12 +8,13 @@ import (
 	"google.golang.org/appengine/log"
 )
 
-func getSessionKey(ctx context.Context) []byte {
-	b64sc := os.Getenv("SESSION_KEY")
-	log.Debugf(ctx, "B64: %v", b64sc)
-	sc, _ := base64.StdEncoding.DecodeString(b64sc)
+func getSessionKey(ctx context.Context) ([]byte, error) {
+	sc, err := base64.StdEncoding.DecodeString(os.Getenv("SESSION_KEY"))
+	if err != nil {
+		log.Debugf(ctx, "Could not get session key from environment. [%v]", err)
 
-	log.Debugf(ctx, "SESSION KEY [%v]", sc)
+		return nil, err
+	}
 
-	return sc
+	return sc, nil
 }
