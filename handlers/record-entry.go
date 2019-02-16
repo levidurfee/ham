@@ -5,7 +5,6 @@ import (
 
 	"github.com/levidurfee/ham/models"
 
-	"github.com/levidurfee/ham/id"
 	"github.com/levidurfee/ham/repos"
 	"google.golang.org/appengine"
 )

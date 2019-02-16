@@ -27,10 +27,10 @@ var (
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", handlers.HomeHandler)
-	r.HandleFunc("/login/", handlers.LoginHandler)
-	r.HandleFunc("/tos/", handlers.TOSHandler)
-	r.HandleFunc("/record-entry/", handlers.RecordEntryHandler)
-	r.HandleFunc("/dashboard/", handlers.DashboardHandler)
+	// r.HandleFunc("/login/", handlers.LoginHandler)
+	// r.HandleFunc("/tos/", handlers.TOSHandler)
+	// r.HandleFunc("/record-entry/", handlers.RecordEntryHandler)
+	// r.HandleFunc("/dashboard/", handlers.DashboardHandler)
 	http.Handle("/", r)
 
 	appengine.Main()

@@ -7,7 +7,6 @@ import (
 
 	"github.com/levidurfee/ham/sess"
 
-	"github.com/levidurfee/ham/id"
 	"github.com/levidurfee/ham/user"
 	"google.golang.org/appengine"
 )
@@ -27,7 +26,6 @@ type PageData struct {
 func NewPageData(w http.ResponseWriter, r *http.Request) PageData {
 
 	ctx := appengine.NewContext(r)
-	ctx = id.CtxWithID(ctx)
 
 	sess.Save(ctx, w, r, "Hi", "levi")
 	l, _ := sess.Get(ctx, w, r, "Hi")
@@ -35,8 +33,6 @@ func NewPageData(w http.ResponseWriter, r *http.Request) PageData {
 	log.Debugf(ctx, "SESSION: [%v] ", l)
 
 	var g PageData
-	g.RequestID = id.GetID(ctx)
-	g.UserID = ""
 	token, err := r.Cookie("token")
 
 	if err == nil {
@@ -52,8 +48,6 @@ func NewPageData(w http.ResponseWriter, r *http.Request) PageData {
 			//log.Debugf(ctx, "%v", g.UserID)
 		}
 	}
-
-	id.PrintID(ctx)
 
 	return g
 }
