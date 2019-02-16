@@ -15,8 +15,13 @@ func getSession(ctx context.Context, w http.ResponseWriter, r *http.Request) (*s
 		httpSessionError(w, err)
 		return nil, err
 	}
+	ek, err := getEncKey(ctx)
+	if err != nil {
+		httpSessionError(w, err)
+		return nil, err
+	}
 
-	session, err := sessions.NewCookieStore(sk).Get(r, defaultSession)
+	session, err := sessions.NewCookieStore(sk, ek).Get(r, defaultSession)
 	if err != nil {
 		httpSessionError(w, err)
 		return nil, err
