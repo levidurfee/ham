@@ -3,13 +3,10 @@ package user
 import (
 	"net/http"
 
-	"github.com/levidurfee/ham/sess"
-
+	firebase "firebase.google.com/go"
 	"google.golang.org/api/option"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
-
-	firebase "firebase.google.com/go"
 )
 
 var (
@@ -20,15 +17,15 @@ var (
 	}
 )
 
-// HAM is a ham
-type HAM struct {
+// User type
+type User struct {
 	Email string
 	UID   string
-	In    bool
 }
 
-// NewHAM creates a new HAM
-func NewHAM(w http.ResponseWriter, r *http.Request) (*HAM, error) {
+// VerifyToken verifies the token
+func VerifyToken(w http.ResponseWriter, r *http.Request, token string) (User, error) {
+	var u User
 	// Get a new Context from App Engine
 	ctx := appengine.NewContext(r)
 
@@ -44,17 +41,11 @@ func NewHAM(w http.ResponseWriter, r *http.Request) (*HAM, error) {
 		log.Errorf(ctx, "app.Auth: %v", err)
 	}
 
-	// Get the Cookie "token", we hope it exists
-	t, err := r.Cookie("token")
-	if err != nil {
-		log.Errorf(ctx, "Cookie Error %v", err)
-	}
-
 	// Validate the token we received
-	tok, err := auth.VerifyIDTokenAndCheckRevoked(ctx, t.Value)
+	tok, err := auth.VerifyIDTokenAndCheckRevoked(ctx, token)
 	if err != nil {
 		log.Infof(ctx, "auth.VerifyIDAndCheckRevoked: %v", err)
-		return nil, err
+		return u, err
 	}
 
 	// Get the User from the token
@@ -66,13 +57,8 @@ func NewHAM(w http.ResponseWriter, r *http.Request) (*HAM, error) {
 	// Log the user information, for now
 	log.Debugf(ctx, "%v", user.UID)
 
-	ham := &HAM{
-		Email: user.Email,
-		UID:   user.UID,
-		In:    true,
-	}
+	u.Email = user.Email
+	u.UID = user.UID
 
-	sess.Save(ctx, w, r, "loggedin", "true")
-
-	return ham, nil
+	return u, nil
 }
