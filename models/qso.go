@@ -1,7 +1,10 @@
-package hamlog
+package models
 
-// Entry of contact between two hams
-type Entry struct {
+// QSOEntityType is for saving to the datastore
+const QSOEntityType = "QSOEntry"
+
+// QSO of contact between two hams
+type QSO struct {
 	UserID      string
 	Date        string
 	CallSign    string
@@ -14,4 +17,5 @@ type Entry struct {
 	Country     string
 	Comments    string
 	Band        int
+	RequestID   int64
 }

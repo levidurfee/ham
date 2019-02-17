@@ -2,13 +2,13 @@
     display:flex;
     justify-content: space-between;
 }
-.header img {
-    height:80px;
+.header .header-img {
+    height:88px;
 }
 .header a {
     color:#222;
     display: inline-block;
-    margin-left:20px;
+    margin-left:5px;
 }
 .header a:hover, .navigation a:hover {
     color:#1EAEDB;
@@ -65,4 +65,17 @@
         width: 100%;
         text-align: center;
     }
+}
+#Ham .firebaseui-card-content form {
+    padding:0;
+    margin:0;
+}
+#Ham .firebaseui-idp-list>.firebaseui-list-item {
+    margin-bottom:4px;
+}
+#Ham .firebaseui-idp-list { margin:0; }
+#Ham .firebaseui-card-content { padding:0 4px; }
+header.header {max-height:88px; overflow: hidden; }
+.hide {
+    display:none !important;
 }

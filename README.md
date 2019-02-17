@@ -1,5 +1,8 @@
 # Ham Radio
 
+[Databases](http://wireless.fcc.gov/uls/index.htm?job=transaction&page=weekly)
+[ARS Licenses](http://wireless.fcc.gov/uls/data/complete/l_amat.zip)
+
 ## Resources
 
 * [Mux](https://github.com/gorilla/mux)
@@ -10,6 +13,8 @@
 * [Login / Register](http://www.cihanozhan.com/building-login-and-register-application-with-golang/)
 * [User package reference](https://cloud.google.com/appengine/docs/standard/go/users/reference)
 * [CRUD GAE Datastore](https://cloud.google.com/appengine/docs/standard/go/datastore/creating-entities)
+* [GAE memcache](https://cloud.google.com/appengine/docs/standard/go/memcache/using)
+* [Only log out of app, not Google](http://ptspts.blogspot.com/2011/12/how-to-log-out-from-appengine-app-only.html)
 
 ## Licenses
 

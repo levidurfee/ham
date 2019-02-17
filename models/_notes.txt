@@ -1,0 +1,1 @@
+Only database models go in here. Don't put all structs in here.
