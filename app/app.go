@@ -25,11 +25,12 @@ func NewApp(w http.ResponseWriter, r *http.Request) App {
 		LoggedIn: false,
 	}
 
-	// I'll want to see if there is a loggedin cookie set, if there isn't, I'll
-	// check to see if there is a token, if there is I'll verify it with
-	// firebase. if there isn't, they are a guest user.
+	// I'll want to see if there is a loggedin cookie set.
 	app.LoggedIn = user.LoggedIn(w, r)
 
+	// Now we check to see if they have a token set. This will tell us if they
+	// are trying to login during this request. If they're trying to login,
+	// then we want to verify their token.
 	if user.IsLoggingIn(w, r) {
 		// Check their token
 		log.Debugf(ctx, "Logging in", app)
