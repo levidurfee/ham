@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/levidurfee/ham/app"
 	"github.com/levidurfee/ham/page"
 )
 
@@ -12,6 +13,9 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		Title:    "Home",
 		Template: "home.html",
 	}
+
+	app := app.NewApp(w, r)
+	_ = app
 
 	renderTemplate(w, td)
 }
