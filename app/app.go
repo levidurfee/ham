@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/levidurfee/ham/page"
+
 	"github.com/levidurfee/ham/sess"
 
 	"github.com/levidurfee/ham/user"
@@ -15,6 +17,7 @@ import (
 type App struct {
 	LoggedIn bool
 	User     user.User
+	Template page.TemplateData
 }
 
 // NewApp constructs a struct with app data.

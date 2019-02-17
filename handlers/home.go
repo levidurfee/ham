@@ -15,7 +15,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	app := app.NewApp(w, r)
-	_ = app
+	app.Template = td
 
-	renderTemplate(w, td)
+	renderTemplate(w, app)
 }
