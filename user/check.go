@@ -19,6 +19,10 @@ func LoggedIn(w http.ResponseWriter, r *http.Request) bool {
 		return false
 	}
 
+	if loggedIn == "" {
+		return false
+	}
+
 	return true
 }
 
@@ -26,6 +30,21 @@ func LoggedIn(w http.ResponseWriter, r *http.Request) bool {
 func IsLoggingIn(w http.ResponseWriter, r *http.Request) bool {
 	// Check for token, if no token, they haven't tried to login
 	token, err := r.Cookie("token")
+	if err != nil {
+		return false
+	}
+
+	// Token was empty, return false, they haven't tried to login
+	if token.Value == "" {
+		return false
+	}
+
+	return true
+}
+
+// IsLoggingOut checks if they're logging out
+func IsLoggingOut(w http.ResponseWriter, r *http.Request) bool {
+	token, err := r.Cookie("logout")
 	if err != nil {
 		return false
 	}

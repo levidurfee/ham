@@ -43,6 +43,15 @@ func NewApp(w http.ResponseWriter, r *http.Request) App {
 		app.User.UID = uid.(string)
 	}
 
+	if user.IsLoggingOut(w, r) {
+		sess.Save(ctx, w, r, "loggedin", "")
+		sess.Save(ctx, w, r, "uid", "")
+		sess.Save(ctx, w, r, "email", "")
+		expiration := time.Now().Add(time.Second)
+		cookie := http.Cookie{Name: "token", Value: "", Expires: expiration}
+		http.SetCookie(w, &cookie)
+	}
+
 	// Now we check to see if they have a token set. This will tell us if they
 	// are trying to login during this request. If they're trying to login,
 	// then we want to verify their token.
