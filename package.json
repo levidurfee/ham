@@ -7,7 +7,7 @@
   "author": "Levi Durfee <levi.durfee@gmail.com>",
   "license": "MIT",
   "scripts" : {
-    "dev": "dev_appserver.py _/app.yaml",
+    "dev": "dev_appserver.py --enable_watching_go_path=false  _/app.yaml",
     "deploy": "gcloud app deploy -q _/app.yaml"
   }
 }

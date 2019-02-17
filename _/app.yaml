@@ -7,9 +7,6 @@ handlers:
   - url: /.*
     script: _go_app
 
-includes:
-  - env_variables.yaml
-
 skip_files:
 # default from GAE
 - ^(.*/)?#.*#$
