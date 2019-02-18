@@ -3,3 +3,5 @@ gin-bin.exe
 app/index.yaml
 *.json
 env_variables.yaml
+config.go
+env.yaml

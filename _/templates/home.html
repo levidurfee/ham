@@ -1,0 +1,11 @@
+{{ if .LoggedIn }}
+<p>logged in</p>
+<p>
+    <!-- {{ .Data.Profile.ID }} -->
+    <a href="/logout">logout</a>
+</p>
+{{ else }}
+<p>
+    <a href="/login">login</a>
+</p>
+{{ end }}
