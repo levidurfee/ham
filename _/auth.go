@@ -21,6 +21,7 @@ const (
 	oauthTokenSessionKey    = "oauth_token"
 	oauthFlowRedirectKey    = "redirect"
 	loggedInSession         = "loggedin"
+	sessionMaxAge           = 86400 * 7
 )
 
 // Profile contains strings for user profile data
@@ -47,7 +48,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Debugf(ctx, "loginHandler error: [%v]", err)
 	}
-	oauthFlowSession.Options.MaxAge = 10 * 60 // 10 minutes
+	oauthFlowSession.Options.MaxAge = sessionMaxAge
 
 	redirectURL, err := validateRedirectURL(r.FormValue("redirect"))
 	if err != nil {
